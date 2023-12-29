@@ -1,12 +1,13 @@
-import React from "react";
-import { Books } from "./Books";
-interface Prop{books: Books[]}
+import { Books } from "./Components/Book"
 
-export const ViewDetail = ({books}:Prop)=>{
+interface Prop{
+  books:Books[]
+}
+export const ViewBooks= ({books}:Prop)=>{
   return(
-    <div className="container">
-      <table className="table">
-        <thead className="table-dark">
+    <div>
+      <table>
+        <thead>
           <tr>
             <td>Title</td>
             <td>Author</td>
@@ -14,10 +15,12 @@ export const ViewDetail = ({books}:Prop)=>{
           </tr>
         </thead>
         <tbody>
-          {books.map(item: {title:string, author:string, price:string}=>(
-            <tr>
-              <td></td>
-            </tr>
+          {books.map((item:{title:string, author:string, price:string})=>(
+          <tr>
+            <td>{item.title}</td>
+            <td>{item.author}</td>
+            <td>{item.price}</td>
+          </tr>
           ))}
         </tbody>
       </table>

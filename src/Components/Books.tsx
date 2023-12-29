@@ -1,48 +1,63 @@
 import React, { useState } from "react";
 import { ViewDetail } from "./ViewDetail";
 
-interface formValue{title:string, author:string, price:string};
-export interface Books{id:number,title:string, author:string, price:string};
+interface FormValue {
+  title:string,
+  author:string,
+  price:string
+}
 
-const Book = ()=>{
-  const [formData, setFormData] = useState<formValue>({title: "", author: "", price: ""})
-  const [book, setBook] = useState<Books[]>([]);
-  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
-    const {title, author, price} = formData;
-    // setBook()
-    return {book};
+export interface Books {
+  id:number,
+  title:string,
+  author:string,
+  price:string
+}
+const Book= ()=>{
+  const [books, setBooks]= useState<Books[]>([])
+  const [formValue, setFormValue]= useState<FormValue>({
+    title:"",
+    author:"",
+    price:""
+  })
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    const {title, author, price}= formValue
+    setBooks([
+      ...books,{id: Math.random() ,title: title, author: author, price}
+    ])
   }
-
-  const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-    const {name, value} = e.target;
-    setFormData({...formData, [name]:value});
+  const handleChange =(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value}= e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value
+    })
   }
-
   return(
     <div>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Title</label>
-            <input type="text" className="form-control" name="title" onChange={handleChange} />
-          </div>
-          <div>
-            <label>Author</label>
-            <input type="text" className="form-control" name="author" onChange={handleChange} />
-          </div>
-          <div>
-            <label>Price</label>
-            <input type="text" className="form-control" name="price" onChange={handleChange} />
-          </div>
-          <div>
-            <button className="btn btn-primary rounded-pill my-3" type="submit">Add</button>
-            {/* <button type="submit">Update</button> */}
-          </div>
+          <label htmlFor="">Title</label>
+          <input type="text" name="title"  value= {formValue.title} onChange={handleChange}/>
+
+          <label htmlFor="">Author</label>
+          <input type="text" name="author" value= {formValue.author} onChange={handleChange}/>
+
+          <label htmlFor="">Price</label>
+          <input type="text" name="price" value= {formValue.price} onChange={handleChange}/>
+
+          <button type="submit" >
+            Add
+          </button>
+          {/* <button type="submit">
+            Update
+          </button> */}
         </form>
       </div>
-      <ViewDetail  books={book}/>
+      <ViewDetail books={books}/>
     </div>
   )
 }
 
-export default Book;
+export default Book
