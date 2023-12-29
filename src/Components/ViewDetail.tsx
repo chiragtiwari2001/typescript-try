@@ -1,9 +1,9 @@
-import { Books } from "./Components/Book"
+import { Books } from "./Books"
 
 interface Prop{
   books:Books[]
 }
-export const ViewBooks= ({books}:Prop)=>{
+export const ViewDetails= ({books}:Prop)=>{
   return(
     <div>
       <table>

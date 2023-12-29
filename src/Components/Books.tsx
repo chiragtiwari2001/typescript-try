@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ViewDetail } from "./ViewDetail";
+import { ViewDetails } from "./ViewDetail";
 
 interface FormValue {
   title:string,
@@ -55,7 +55,7 @@ const Book= ()=>{
           </button> */}
         </form>
       </div>
-      <ViewDetail books={books}/>
+      <ViewDetails books={books}/>
     </div>
   )
 }
